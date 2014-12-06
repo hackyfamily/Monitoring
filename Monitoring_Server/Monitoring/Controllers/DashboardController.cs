@@ -6,7 +6,7 @@ using System.Web.Mvc;
 
 namespace Monitoring.Controllers
 {
-    public class LiveController : Controller
+    public class DashboardController : Controller
     {
         private static List<int> _data = new List<int>{70, 75, 77, 76};
 

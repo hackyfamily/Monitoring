@@ -1,0 +1,103 @@
+﻿@{
+    ViewBag.Title = "Settings";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+    var metrics = new[] {"Heart Rate", "Battery Life", "Activity Level"};
+    var events = new[] {"Falls Below", "Less Than"};
+}
+
+@section scripts
+{
+    <script src="http://code.highcharts.com/highcharts.js"></script>
+    <script src="http://code.highcharts.com/modules/exporting.js"></script>
+    <script type="text/javascript">
+        var chart;
+
+        $(function () {
+            chart = $('#container').highcharts({
+                chart: {
+                    plotBackgroundColor: null,
+                    plotBorderWidth: null,
+                    plotShadow: false,
+                    events: {
+                        load: requestData
+                    }
+                },
+                tooltip: {
+                    pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+                },
+                xAxis: {
+                    categories: ['-3 Min', '-2 Min', '-1 Min', 'Now']
+                },
+                yAxis: {
+                    title: {
+                        text: ''
+                    }
+                },
+                plotOptions: {
+                    line: {
+                        dataLabels: {
+                            enabled: true
+                        },
+                        enableMouseTracking: false
+                    }
+                },
+                series: [{
+                    name: 'Heart Rate',
+                    data: []
+                }]
+            });
+        });
+
+        function requestData() {
+            $.ajax({
+                url: '@Url.Action("Data")',
+                success: function (point) {
+                    var series = chart.highcharts().series[0],
+                        shift = series.data.length > 20;
+
+                    var points = chart.highcharts().series[0].points;
+
+                    for (var i = 0; i < points.length; i++) {
+                        points[i].remove();
+                    }
+
+                    chart.highcharts().series[0].setData(point);
+
+                    setTimeout(requestData, 10000);
+                },
+                cache: false
+            });
+        }
+    </script>
+
+    <style type="text/css">
+        .highcharts-container > svg > text {
+            display: none;
+        }
+
+        .highcharts-legend {
+            display: none;
+        }
+    </style>
+}
+
+<h3>Activity Report - TODAY</h3>
+
+
+
+
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-3 col-md-2 sidebar">
+            <ul class="nav nav-sidebar">
+                <li class="active"><a href="#">Overview <span class="sr-only">(current)</span></a></li>
+                <li><a href="#">Reports</a></li>
+                <li><a href="#">Analytics</a></li>
+                <li><a href="#">Export</a></li>
+            </ul>
+        </div>
+        <div id="container" style="min-width: 600px; height: 300px; max-width: 600px; margin: 0 auto"></div>
+    </div>
+</div>

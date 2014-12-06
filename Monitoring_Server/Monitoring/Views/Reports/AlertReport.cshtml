@@ -82,7 +82,7 @@
     </style>
 }
 
-<h3>Activity Report - TODAY</h3>
+<h3>Alert Report</h3>
 
 
 
@@ -90,14 +90,13 @@
 
 <div class="container-fluid">
     <div class="row">
-        <div class="col-sm-3 col-md-2 sidebar">
+        <div class="col-sm-2 col-md-1 sidebar">
             <ul class="nav nav-sidebar">
-                <li class="active"><a href="#">Overview <span class="sr-only">(current)</span></a></li>
-                <li><a href="#">Reports</a></li>
-                <li><a href="#">Analytics</a></li>
-                <li><a href="#">Export</a></li>
+                <li><a href="@Url.Action("ActivityReport")">Activity Report</a></li>
+                <li class="active"><a href="@Url.Action("AlertReport")">Alert Report <span class="sr-only">(current)</span></a></li>
+                <li><a href="@Url.Action("LocationLog")">Location Log</a></li>
             </ul>
         </div>
-        <div id="container" style="min-width: 600px; height: 300px; max-width: 600px; margin: 0 auto"></div>
+        @*<div id="container" style="min-width: 600px; height: 300px; max-width: 600px; margin: 0 auto"></div>*@
     </div>
 </div>

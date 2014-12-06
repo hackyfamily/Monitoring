@@ -1,0 +1,98 @@
+﻿@{
+    ViewBag.Title = "Settings";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section scripts
+{
+    <script src="http://code.highcharts.com/highcharts.js"></script>
+    <script src="http://code.highcharts.com/modules/exporting.js"></script>
+    <script type="text/javascript">
+        var chart;
+
+        $(function () {
+            chart = $('#container').highcharts({
+                chart: {
+                    plotBackgroundColor: null,
+                    plotBorderWidth: null,
+                    plotShadow: false,
+                    events: {
+                        load: requestData
+                    }
+                },
+                tooltip: {
+                    headerFormat: '<b>{series.name}</b><br>',
+                    pointFormat: '{point.x:%e. %b}: {point.y:.2f} m'
+                },
+                xAxis: {
+                    type: 'datetime'
+                },
+                yAxis: {
+                    title: {
+                    }
+                },
+                plotOptions: {
+                    line: {
+                        dataLabels: {
+                            enabled: true
+                        },
+                        enableMouseTracking: false
+                    }
+                },
+                series: [{
+                    name: 'Heart Rate', data: [
+                    [Date.UTC(2014, 12, 6), 70],
+                    [Date.UTC(2014, 12, 6), 75],
+                    [Date.UTC(2014, 12, 6), 80],
+                    [Date.UTC(2014, 12, 6), 87],
+                    [Date.UTC(2014, 12, 6), 72]]
+                }, { name: 'Battery Life', data: [] }, { name: 'Activity Level', data: [] }]
+            });
+        });
+
+        function requestData() {
+            $.ajax({
+                url: '@Url.Action("ActivityReport")',
+                success: function (data) {
+                    var points = chart.highcharts().series[0].points;
+
+                    for (var i = 0; i < points.length; i++) {
+                        points[i].remove();
+                    }
+
+                    chart.highcharts().series[0].setData(data["heartRate"]);
+                    chart.highcharts().series[1].setData(data["batteryLife"]);
+                    chart.highcharts().series[2].setData(data["activityLevel"]);
+
+                    setTimeout(requestData, 30000);
+                },
+                cache: false
+            });
+        }
+    </script>
+
+    <style type="text/css">
+        .highcharts-container > svg > text {
+            display: none;
+        }
+    </style>
+}
+
+<h3>Activity Report - TODAY</h3>
+
+
+
+
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-2 col-md-1 sidebar">
+            <ul class="nav nav-sidebar">
+                <li class="active"><a href="@Url.Action("ActivityReport")">Activity Report <span class="sr-only">(current)</span></a></li>
+                <li><a href="@Url.Action("AlertReport")">Alert Report</a></li>
+                <li><a href="@Url.Action("LocationLog")">Location Log</a></li>
+            </ul>
+        </div>
+        <div id="container" style="min-width: 600px; height: 300px; max-width: 600px; margin: 0 auto"></div>
+    </div>
+</div>

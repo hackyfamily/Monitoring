@@ -33,6 +33,9 @@ namespace Monitoring
     partial void InsertFakeData(FakeData instance);
     partial void UpdateFakeData(FakeData instance);
     partial void DeleteFakeData(FakeData instance);
+    partial void InsertSetting(Setting instance);
+    partial void UpdateSetting(Setting instance);
+    partial void DeleteSetting(Setting instance);
     #endregion
 		
 		public MonitoringDataContext() : 
@@ -72,6 +75,14 @@ namespace Monitoring
 				return this.GetTable<FakeData>();
 			}
 		}
+		
+		public System.Data.Linq.Table<Setting> Settings
+		{
+			get
+			{
+				return this.GetTable<Setting>();
+			}
+		}
 	}
 	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.FakeData")]
@@ -88,6 +99,8 @@ namespace Monitoring
 		
 		private System.Nullable<System.DateTime> _EventDt;
 		
+		private System.Nullable<bool> _AlertSent;
+		
     #region Extensibility Method Definitions
     partial void OnLoaded();
     partial void OnValidate(System.Data.Linq.ChangeAction action);
@@ -100,6 +113,8 @@ namespace Monitoring
     partial void OnValueChanged();
     partial void OnEventDtChanging(System.Nullable<System.DateTime> value);
     partial void OnEventDtChanged();
+    partial void OnAlertSentChanging(System.Nullable<bool> value);
+    partial void OnAlertSentChanged();
     #endregion
 		
 		public FakeData()
@@ -183,6 +198,208 @@ namespace Monitoring
 					this._EventDt = value;
 					this.SendPropertyChanged("EventDt");
 					this.OnEventDtChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_AlertSent", DbType="Bit")]
+		public System.Nullable<bool> AlertSent
+		{
+			get
+			{
+				return this._AlertSent;
+			}
+			set
+			{
+				if ((this._AlertSent != value))
+				{
+					this.OnAlertSentChanging(value);
+					this.SendPropertyChanging();
+					this._AlertSent = value;
+					this.SendPropertyChanged("AlertSent");
+					this.OnAlertSentChanged();
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.FakeSettings")]
+	public partial class Setting : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _Id;
+		
+		private string _WearerName;
+		
+		private string _EmergencyPhone;
+		
+		private string _Phone;
+		
+		private string _Email;
+		
+		private string _DeviceNumber;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnIdChanging(int value);
+    partial void OnIdChanged();
+    partial void OnWearerNameChanging(string value);
+    partial void OnWearerNameChanged();
+    partial void OnEmergencyPhoneChanging(string value);
+    partial void OnEmergencyPhoneChanged();
+    partial void OnPhoneChanging(string value);
+    partial void OnPhoneChanged();
+    partial void OnEmailChanging(string value);
+    partial void OnEmailChanged();
+    partial void OnDeviceNumberChanging(string value);
+    partial void OnDeviceNumberChanged();
+    #endregion
+		
+		public Setting()
+		{
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int Id
+		{
+			get
+			{
+				return this._Id;
+			}
+			set
+			{
+				if ((this._Id != value))
+				{
+					this.OnIdChanging(value);
+					this.SendPropertyChanging();
+					this._Id = value;
+					this.SendPropertyChanged("Id");
+					this.OnIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_WearerName", DbType="NVarChar(200)")]
+		public string WearerName
+		{
+			get
+			{
+				return this._WearerName;
+			}
+			set
+			{
+				if ((this._WearerName != value))
+				{
+					this.OnWearerNameChanging(value);
+					this.SendPropertyChanging();
+					this._WearerName = value;
+					this.SendPropertyChanged("WearerName");
+					this.OnWearerNameChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_EmergencyPhone", DbType="NVarChar(200)")]
+		public string EmergencyPhone
+		{
+			get
+			{
+				return this._EmergencyPhone;
+			}
+			set
+			{
+				if ((this._EmergencyPhone != value))
+				{
+					this.OnEmergencyPhoneChanging(value);
+					this.SendPropertyChanging();
+					this._EmergencyPhone = value;
+					this.SendPropertyChanged("EmergencyPhone");
+					this.OnEmergencyPhoneChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Phone", DbType="NVarChar(200)")]
+		public string Phone
+		{
+			get
+			{
+				return this._Phone;
+			}
+			set
+			{
+				if ((this._Phone != value))
+				{
+					this.OnPhoneChanging(value);
+					this.SendPropertyChanging();
+					this._Phone = value;
+					this.SendPropertyChanged("Phone");
+					this.OnPhoneChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Email", DbType="NVarChar(200)")]
+		public string Email
+		{
+			get
+			{
+				return this._Email;
+			}
+			set
+			{
+				if ((this._Email != value))
+				{
+					this.OnEmailChanging(value);
+					this.SendPropertyChanging();
+					this._Email = value;
+					this.SendPropertyChanged("Email");
+					this.OnEmailChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DeviceNumber", DbType="NVarChar(200)")]
+		public string DeviceNumber
+		{
+			get
+			{
+				return this._DeviceNumber;
+			}
+			set
+			{
+				if ((this._DeviceNumber != value))
+				{
+					this.OnDeviceNumberChanging(value);
+					this.SendPropertyChanging();
+					this._DeviceNumber = value;
+					this.SendPropertyChanged("DeviceNumber");
+					this.OnDeviceNumberChanged();
 				}
 			}
 		}

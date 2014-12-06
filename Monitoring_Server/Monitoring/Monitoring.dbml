@@ -6,6 +6,17 @@
       <Column Name="Metric" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
       <Column Name="Value" Type="System.Double" DbType="Float" CanBeNull="true" />
       <Column Name="EventDt" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="AlertSent" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.FakeSettings" Member="Settings">
+    <Type Name="Setting">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="WearerName" Type="System.String" DbType="NVarChar(200)" CanBeNull="true" />
+      <Column Name="EmergencyPhone" Type="System.String" DbType="NVarChar(200)" CanBeNull="true" />
+      <Column Name="Phone" Type="System.String" DbType="NVarChar(200)" CanBeNull="true" />
+      <Column Name="Email" Type="System.String" DbType="NVarChar(200)" CanBeNull="true" />
+      <Column Name="DeviceNumber" Type="System.String" DbType="NVarChar(200)" CanBeNull="true" />
     </Type>
   </Table>
 </Database>

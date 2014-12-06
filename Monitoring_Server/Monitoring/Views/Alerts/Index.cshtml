@@ -1,4 +1,6 @@
-﻿@{
+﻿@using Microsoft.Ajax.Utilities
+@model IEnumerable<Monitoring.Alert>
+@{
     ViewBag.Title = "Settings";
     Layout = "~/Views/Shared/_Layout.cshtml";
 
@@ -16,42 +18,26 @@
             <label><input type="checkbox"> Fall Detection</label>
         </div>
     </div>
-
-    <div class="form-group">
-        <div class="col-xs-4 selectContainer">
-            @Html.DropDownList("Metric1", new SelectList(metrics, "Heart Rate"), "Choose", new {@class = "form-control"})
+    
+    @{ var i = 0;}
+    @foreach (var alert in Model)
+    {
+        @Html.Hidden(string.Format("alerts[{0}].Id", i), alert.Id)
+        <div class="form-group">
+            <div class="col-xs-4 selectContainer">
+                @Html.DropDownList(string.Format("alerts[{0}].Metric", i), new SelectList(metrics, alert.Metric), "Choose", new {@class = "form-control"})
+            </div>
+            <div class="col-xs-4 selectContainer">
+                @Html.DropDownList(string.Format("alerts[{0}].Condition", i), new SelectList(events, alert.Condition), "Choose", new {@class = "form-control"})
+            </div>
+            <div class="col-xs-4">
+                @Html.TextBox(string.Format("alerts[{0}].Value", i), alert.Value, new {@class = "form-control", type = "number", min = "0"})
+            </div>
         </div>
-        <div class="col-xs-4 selectContainer">
-            @Html.DropDownList("Event1", new SelectList(events, "Falls Below"), "Choose", new {@class = "form-control"})
-        </div>
-        <div class="col-xs-4">
-            @Html.TextBox("Value1", "", new {@class = "form-control"})
-        </div>
-    </div>
-
-    <div class="form-group">
-        <div class="col-xs-4 selectContainer">
-            @Html.DropDownList("Metric1", new SelectList(metrics, "Battery Life"), "Choose", new {@class = "form-control"})
-        </div>
-        <div class="col-xs-4 selectContainer">
-            @Html.DropDownList("Event1", new SelectList(events, "Less Than"), "Choose", new {@class = "form-control"})
-        </div>
-        <div class="col-xs-4">
-            @Html.TextBox("Value1", "", new {@class = "form-control"})
-        </div>
-    </div>
-
-    <div class="form-group">
-        <div class="col-xs-4 selectContainer">
-            @Html.DropDownList("Metric1", new SelectList(metrics, "Activity Level"), "Choose", new {@class = "form-control"})
-        </div>
-        <div class="col-xs-4 selectContainer">
-            @Html.DropDownList("Event1", new SelectList(events), "Choose", new {@class = "form-control"})
-        </div>
-        <div class="col-xs-4">
-            @Html.TextBox("Value1", "", new {@class = "form-control"})
-        </div>
-    </div>
+        {
+            i++;
+        }
+    }
 
     <div class="form-group">
         <div class="col-xs-offset-0 col-xs-1">

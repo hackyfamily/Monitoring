@@ -16,8 +16,6 @@ namespace Monitoring.Controllers
 
         public ActionResult Index()
         {
-            return View();
-
             /*
             //string recipient = "2146862632@txt.att.net";  //Aaron's cellphone
             string recipient = "aarauz15@gmail.com";
@@ -26,11 +24,33 @@ namespace Monitoring.Controllers
 
             SendSMS(recipient, eventName, body);
             */
+
+
+            using (var dc = new MonitoringDataContext())
+            {
+                var alerts = dc.Alerts.ToArray();
+
+                return View(alerts);
+            }
         }
 
         [HttpPost]
-        public ActionResult Index(FormCollection form)
+        public ActionResult Index(Alert[] alerts)
         {
+            using (var dc = new MonitoringDataContext())
+            {
+                foreach (var alert in dc.Alerts)
+                {
+                    dc.Alerts.DeleteOnSubmit(alert);
+                }
+
+                foreach (var alert in alerts)
+                {
+                    dc.Alerts.InsertOnSubmit(alert);
+                }
+                dc.SubmitChanges();
+            }
+
             return RedirectToAction("Index", "Home");
         }
 

@@ -1,0 +1,26 @@
+USE [Monitoring]
+GO
+/****** Object:  Table [dbo].[FakeAlerts]    Script Date: 12/06/2014 08:19:52 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[FakeAlerts]') AND type in (N'U'))
+BEGIN
+CREATE TABLE [dbo].[FakeAlerts](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[Metric] [nvarchar](200) NOT NULL,
+	[Condition] [nvarchar](200) NOT NULL,
+	[Value] [float] NOT NULL,
+ CONSTRAINT [PK_FakeAlerts] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+) ON [PRIMARY]
+END
+GO
+SET IDENTITY_INSERT [dbo].[FakeAlerts] ON
+INSERT [dbo].[FakeAlerts] ([Id], [Metric], [Condition], [Value]) VALUES (2, N'Heart Rate', N'Falls Below', 40)
+INSERT [dbo].[FakeAlerts] ([Id], [Metric], [Condition], [Value]) VALUES (3, N'Battery Life', N'Less Than', 24)
+INSERT [dbo].[FakeAlerts] ([Id], [Metric], [Condition], [Value]) VALUES (4, N'Activity Level', N'Less Than', 50)
+SET IDENTITY_INSERT [dbo].[FakeAlerts] OFF

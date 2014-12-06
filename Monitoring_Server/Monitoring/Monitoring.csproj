@@ -133,7 +133,7 @@
     <Compile Include="Controllers\AlertsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\DashboardController.cs" />
-    <Compile Include="Controllers\ReportsController.cs" />
+    <Compile Include="Controllers\Reporting.cs" />
     <Compile Include="Controllers\SettingsController.cs" />
     <Compile Include="Core\CheckAlertsTask.cs" />
     <Compile Include="Core\SchedulerRegistry.cs" />
@@ -211,6 +211,7 @@
       <LastGenOutput>Monitoring.designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </Content>
+    <None Include="Properties\PublishProfiles\Local.pubxml" />
     <None Include="Scripts\jquery-1.8.2.intellisense.js" />
     <Content Include="Scripts\Highcharts\adapters\standalone-framework.js" />
     <Content Include="Scripts\Highcharts\adapters\standalone-framework.src.js" />
@@ -276,9 +277,10 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Settings\Index.cshtml" />
     <Content Include="Views\Alerts\Index.cshtml" />
-    <Content Include="Views\Reports\LocationLog.cshtml" />
-    <Content Include="Views\Reports\AlertReport.cshtml" />
-    <Content Include="Views\Reports\ActivityReport.cshtml" />
+    <Content Include="Views\Reporting\LocationLog.cshtml" />
+    <Content Include="Views\Reporting\AlertReport.cshtml" />
+    <Content Include="Views\Reporting\ActivityReport.cshtml" />
+    <Content Include="Views\Shared\_Home.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

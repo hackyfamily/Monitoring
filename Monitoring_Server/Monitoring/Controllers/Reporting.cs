@@ -7,7 +7,7 @@ using Monitoring.Models;
 
 namespace Monitoring.Controllers
 {
-    public class ReportsController : Controller
+    public class ReportingController : Controller
     {
         private static List<int> _data = new List<int> { 70, 75, 77, 76 };
 

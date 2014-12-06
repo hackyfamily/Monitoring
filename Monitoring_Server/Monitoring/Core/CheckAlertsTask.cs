@@ -20,14 +20,20 @@ namespace Monitoring.Core
             {
                 var fakeData = dc.FakeDatas.Where(x => x.EventDt != null && x.EventDt.Value.Date >= DateTime.Today && x.AlertSent == null).OrderBy(x => x.EventDt).ToArray();
 
-                foreach (var data in fakeData)
+               foreach (var data in fakeData)
                 {
                     if (data.Metric == "Heart Rate" && data.Value > 100)
                     {
                         // Send Alert - Heart Attack 
                         SendSMS(phone, "Heart Rate", "Alert: Heart Rate > 100");
+                        data.AlertSent = true;
+                    }
+                    else
+                    {
+                        data.AlertSent = false;
                     }
                 }
+                dc.SubmitChanges();
             }
         }
 

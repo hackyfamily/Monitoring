@@ -16,7 +16,11 @@ namespace Monitoring.Core
 
                 foreach (var data in fakeData)
                 {
-                    // send email
+                    if (data.Metric == "Heart Rate" && data.Value > 100)
+                    {
+                        // heart attack?
+                        // send email...
+                    }
                 }
             }
         }

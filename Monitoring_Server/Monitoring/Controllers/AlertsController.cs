@@ -6,17 +6,20 @@ using System.Web.Mvc;
 
 namespace Monitoring.Controllers
 {
-    public class HomeController : Controller
+    public class AlertsController : Controller
     {
         //
-        // GET: /Home/
+        // GET: /Alerts/
 
         public ActionResult Index()
         {
-
-
             return View();
         }
 
+        [HttpPost]
+        public ActionResult Index(FormCollection form)
+        {
+            return RedirectToAction("Index", "Home");
+        }
     }
 }

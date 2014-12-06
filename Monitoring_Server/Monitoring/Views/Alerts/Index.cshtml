@@ -1,0 +1,62 @@
+﻿@{
+    ViewBag.Title = "Settings";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+    var metrics = new[] {"Heart Rate", "Battery Life", "Activity Level"};
+    var events = new[] {"Falls Below", "Less Than"};
+}
+
+
+<form class="form-horizontal" style="text-align: left; display: inline-block; width: auto;" action="@Url.Action("Index")" method="POST">
+    
+    <h3>Set up alerts</h3>
+
+    <div class="form-group">
+        <div class="checkbox col-xs-12">
+            <label><input type="checkbox"> Fall Detection</label>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-xs-4 selectContainer">
+            @Html.DropDownList("Metric1", new SelectList(metrics, "Heart Rate"), "Choose", new {@class = "form-control"})
+        </div>
+        <div class="col-xs-4 selectContainer">
+            @Html.DropDownList("Event1", new SelectList(events, "Falls Below"), "Choose", new {@class = "form-control"})
+        </div>
+        <div class="col-xs-4">
+            @Html.TextBox("Value1", "", new {@class = "form-control"})
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-xs-4 selectContainer">
+            @Html.DropDownList("Metric1", new SelectList(metrics, "Battery Life"), "Choose", new {@class = "form-control"})
+        </div>
+        <div class="col-xs-4 selectContainer">
+            @Html.DropDownList("Event1", new SelectList(events, "Less Than"), "Choose", new {@class = "form-control"})
+        </div>
+        <div class="col-xs-4">
+            @Html.TextBox("Value1", "", new {@class = "form-control"})
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-xs-4 selectContainer">
+            @Html.DropDownList("Metric1", new SelectList(metrics, "Activity Level"), "Choose", new {@class = "form-control"})
+        </div>
+        <div class="col-xs-4 selectContainer">
+            @Html.DropDownList("Event1", new SelectList(events), "Choose", new {@class = "form-control"})
+        </div>
+        <div class="col-xs-4">
+            @Html.TextBox("Value1", "", new {@class = "form-control"})
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-xs-offset-10 col-xs-12">
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </div>
+    </div>
+
+</form>

@@ -1,0 +1,51 @@
+﻿@{
+    ViewBag.Title = "Settings";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<form class="form-horizontal" style="text-align: left; display: inline-block; width: auto;" action="@Url.Action("Index")" method="POST">
+    
+    <h3>Fitbit Wearer Info</h3>
+
+    <div class="form-group">
+        <label for="Name" class="control-label col-xs-3">Fitbit wearer's name:</label>
+        <div class="col-xs-9">
+            <input type="text" class="form-control" id="Name">
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="EmergencyPhone" class="control-label col-xs-6">Local emergency number for Fitbit wearer:</label>
+        <div class="col-xs-6">
+            <input type="text" class="form-control" id="EmergencyPhone">
+        </div>
+    </div>
+
+
+    <h3>Family Emergency Contacts</h3>
+    <div class="form-group">
+        <label for="Phone" class="control-label col-xs-3">Phone Number:</label>
+        <div class="col-xs-9">
+            <input type="text" class="form-control" id="Phone">
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="Email" class="control-label col-xs-3">Email address</label>
+        <div class="col-xs-9">
+            <input type="email" class="form-control" id="Email" placeholder="Email">
+        </div>
+    </div>
+    
+    <h3>Link Fitbit Device</h3>
+    <div class="form-group">
+        <label for="DeviceNumber" class="control-label col-xs-8">Enter the FitBit device number. The device number can be found...</label>
+        <div class="col-xs-8">
+            <input type="text" class="form-control" id="DeviceNumber">
+        </div>
+        <div class="col-xs-2">
+            <button type="submit" class="btn btn-primary">Link</button>
+        </div>
+    </div>
+</form>

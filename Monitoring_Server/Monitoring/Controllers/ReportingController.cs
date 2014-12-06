@@ -9,24 +9,9 @@ namespace Monitoring.Controllers
 {
     public class ReportingController : Controller
     {
-        private static List<int> _data = new List<int> { 70, 75, 77, 76 };
-
         public ActionResult Index()
         {
             return RedirectToAction("ActivityReport");
-        }
-
-
-        public JsonResult Data()
-        {
-            Random random = new Random();
-
-            int y = random.Next(70, 100);
-
-            _data.RemoveAt(0);
-            _data.Add(y);
-
-            return Json(_data.ToArray(), JsonRequestBehavior.AllowGet);
         }
 
         public ActionResult ActivityReport()

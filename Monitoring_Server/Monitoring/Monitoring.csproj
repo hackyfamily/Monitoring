@@ -180,7 +180,7 @@
     <Compile Include="Controllers\AlertsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\DashboardController.cs" />
-    <Compile Include="Controllers\Reporting.cs" />
+    <Compile Include="Controllers\ReportingController.cs" />
     <Compile Include="Controllers\SettingsController.cs" />
     <Compile Include="Core\CheckAlertsTask.cs" />
     <Compile Include="Core\SchedulerRegistry.cs" />

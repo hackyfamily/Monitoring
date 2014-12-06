@@ -17,7 +17,7 @@ namespace Monitoring.Controllers
         [HttpPost]
         public ActionResult Index(FormCollection form)
         {
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("Index", "Alerts");
         }
     }
 }
